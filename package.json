@@ -1,6 +1,6 @@
 {
   "name": "@oresoftware/registry",
-  "version": "0.0.102",
+  "version": "0.0.103",
   "description": "Semver-oriented TypeScript library skeleton.",
   "main": "dist/index.js",
   "bin": {
@@ -29,8 +29,7 @@
   },
   "homepage": "https://github.com/your-org/registry#readme",
   "dependencies": {
-    "gmx": "latest",
-    "nock": "^9.2.5"
+    "gmx": "latest"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.46",
