@@ -5,13 +5,13 @@ RUN apt-get -y install sudo
 RUN sudo apt-get -y update
 RUN apt-get install -y netcat
 
-RUN sudo echo "newuser ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN sudo echo "node ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
-RUN useradd -ms /bin/bash newuser
-USER newuser
-ENV HOME=/home/newuser
-ENV USER=newuser
-WORKDIR /home/newuser/app
+#RUN useradd -ms /bin/bash newuser
+USER node
+ENV HOME=/home/node
+ENV USER=node
+WORKDIR /home/node/app
 
 RUN mkdir -p "$HOME/.npm-global"
 ENV NPM_CONFIG_PREFIX="$HOME/.npm-global"
@@ -19,9 +19,10 @@ ENV NPM_CONFIG_PREFIX="$HOME/.npm-global"
 ENV PATH="$HOME/.npm-global/bin:$PATH"
 
 RUN sudo chown -R $(whoami) "$HOME/.npm-global"
+RUN sudo chown -R $(whoami) "$HOME/app"
 RUN  npm install -g typescript
 
-RUN npm install -g "@oresoftware/registry@0.0.103"
+RUN npm install -g "@oresoftware/registry@0.0.104"
 
 ENV npm_registry_override="yes"
 

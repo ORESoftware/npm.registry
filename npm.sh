@@ -5,7 +5,7 @@
 
 if [[ "$npm_registry_override" != "yes" ]]; then
   echo "refusing to source npm.sh script because env is not set."
-  exit 0;
+  return 0;
 fi
 
 
