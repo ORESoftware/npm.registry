@@ -11,7 +11,7 @@ RUN useradd -ms /bin/bash newuser
 USER newuser
 ENV HOME=/home/newuser
 ENV USER=newuser
-WORKDIR /home/newuser
+WORKDIR /home/newuser/app
 
 RUN mkdir -p "$HOME/.npm-global"
 ENV NPM_CONFIG_PREFIX="$HOME/.npm-global"

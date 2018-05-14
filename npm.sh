@@ -3,6 +3,11 @@
 
 ### RUN /bin/bash -c "source /usr/local/bin/virtualenvwrapper.sh"
 
+if [[ "$npm.registry.override" != "yes" ]]; then
+  echo "refusing to source npm.sh script because env is not set."
+  exit 0;
+fi
+
 
 npm(){
   # make request to local server

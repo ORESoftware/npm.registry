@@ -9,12 +9,12 @@ fi
 
 export r2g_skip_postinstall="yes";
 
-gmx_gray='\033[1;30m'
-gmx_magenta='\033[1;35m'
-gmx_cyan='\033[1;36m'
-gmx_orange='\033[1;33m'
-gmx_green='\033[1;32m'
-gmx_no_color='\033[0m'
+npmr_gray='\033[1;30m'
+npmr_magenta='\033[1;35m'
+npmr_cyan='\033[1;36m'
+npmr_orange='\033[1;33m'
+npmr_green='\033[1;32m'
+npmr_no_color='\033[0m'
 
 nm="$HOME/.oresoftware/nodejs/node_modules";
 
@@ -71,9 +71,9 @@ mkdir -p "$nm" && {
 wait;
 
 
-echo -e "${gmx_green}npm bash function was installed successfully.${gmx_no_color}";
+echo -e "${npmr_green}npm bash function was installed successfully.${npmr_no_color}";
 echo -e "Add the following line to your .bashrc/.bash_profile files:";
-echo -e "${gmx_cyan} source \"\$HOME/.oresoftware/shell.sh\"${gmx_no_color}";
+echo -e "${npmr_cyan} source \"\$HOME/.oresoftware/shell.sh\"${npmr_no_color}";
 echo " ";
 
 
