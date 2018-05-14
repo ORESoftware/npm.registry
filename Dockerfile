@@ -21,7 +21,9 @@ ENV PATH="$HOME/.npm-global/bin:$PATH"
 RUN sudo chown -R $(whoami) "$HOME/.npm-global"
 RUN  npm install -g typescript
 
-RUN npm install -g @oresoftware/registry
+RUN npm install -g "@oresoftware/registry@0.0.103"
+
+ENV npm_registry_override="yes"
 
 RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh"
 
