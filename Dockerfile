@@ -23,24 +23,22 @@ WORKDIR /app
 #RUN sudo chown -R $(whoami) "$HOME/.npm-global"
 #RUN sudo chown -R $(whoami) "$HOME/app"
 
-
-RUN  npm install -g typescript
-
-#RUN npm install "@oresoftware/registry@0.0.105"
-
-RUN npm install -g "@oresoftware/registry@0.0.105"
+COPY package.json .
+RUN npm install typescript
+RUN  curl -H 'Cache-Control: no-cache' \
+        "https://raw.githubusercontent.com/oresoftware/registry/master/npm.sh?$(date +%s)" \
+        --output "$HOME/.oresoftware/bash/npm.registry.sh"
 
 ENV npm_registry_override="yes"
 
 RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh"
 
-COPY package.json .
-RUN npm install --loglevel=warn
+RUN sudo npm install --loglevel=warn
 
 ENV PATH="./node_modules/.bin:${PATH}"
 
 COPY . .
-RUN tsc
+RUN gmx tsc
 
 #ENTRYPOINT ["./test/index.sh"]
 #ENTRYPOINT ["r2g"]
