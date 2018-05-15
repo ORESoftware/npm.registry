@@ -1,6 +1,6 @@
 {
   "name": "@oresoftware/registry",
-  "version": "0.0.105",
+  "version": "0.0.106",
   "description": "Semver-oriented TypeScript library skeleton.",
   "main": "dist/index.js",
   "bin": {
@@ -10,7 +10,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "suman test",
-    "postinstall": "./postinstall2.sh"
+    "postinstall": "./postinstall.sh"
   },
   "repository": {
     "type": "git",
