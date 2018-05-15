@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/your-org/registry.git"
+    "url": "git+https://github.com/ORESoftware/registry.git"
   },
   "keywords": [
     "typescript",
@@ -25,11 +25,12 @@
   "author": "TODO Yo.Mama",
   "license": "SEE LICENSE IN LICENSE.md",
   "bugs": {
-    "url": "https://github.com/your-org/registry/issues"
+    "url": "https://github.com/ORESoftware/registry/issues"
   },
-  "homepage": "https://github.com/your-org/registry#readme",
+  "homepage": "https://github.com/ORESoftware/registry#readme",
   "dependencies": {
-    "gmx": "0.0.123"
+    "gmx": "0.0.123",
+    "waldo": "0.0.107"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.46",

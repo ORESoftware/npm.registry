@@ -17,7 +17,7 @@
 
 #      nc localhost 3440 | tar -x > ores.tgz
 
-      nc localhost 3440 | tar -x -O > ores-$(date +%s.%N).tgz
+      nc "127.0.0.1" 3440 | tar -x -O > ores-$(date +%s.%N).tgz
 
 
       for x in *; do

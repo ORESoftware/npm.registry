@@ -62,9 +62,7 @@ mkdir -p "$nm" && {
 
     (
       cd "$HOME/.oresoftware/nodejs" && npm install --silent "$ores_registry_exec" 2> /dev/null || {
-
         echo "could not install npm in user home.";
-
       }
     )
 

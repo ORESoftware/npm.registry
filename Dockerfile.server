@@ -33,24 +33,8 @@ RUN mkdir -p "$HOME/.oresoftware/bash"
 
 COPY package.json .
 RUN npm install typescript
+RUN npm install
 
-RUN  curl -H 'Cache-Control: no-cache' \
-        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.sh?$(date +%s)" \
-        --output "$HOME/.oresoftware/bash/npm.registry.sh"
-
-RUN  curl -H 'Cache-Control: no-cache' \
-        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.exec.sh?$(date +%s)" \
-        --output "$HOME/.oresoftware/execs/npm.registry.sh"
-
-ENV npm_registry_override="yes"
-
-RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh"
-
-#RUN echo "$HOME/.oresoftware/execs/npm.registry.sh" | bash
-
-#RUN ["/bin/bash", "-c", "echo hello"]
-
-#RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh && npm install --loglevel=warn"
 
 ENV PATH="./node_modules/.bin:${PATH}"
 
@@ -58,4 +42,6 @@ COPY . .
 RUN tsc || echo "fail compilation";
 #RUN gmx tsc
 
-ENTRYPOINT ["/bin/bash", "./test/index.sh"]
+EXPOSE 3440
+
+ENTRYPOINT ["node", "dist/cli.js"]

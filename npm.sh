@@ -27,10 +27,11 @@ npm(){
 
 #      nc localhost 3440 | tar -x > ores.tgz
 
-      nc localhost 3440 | tar -x -O > ores-$(date +%s.%N).tgz
+      nc "npm_registry_server" 3440 | tar -x -O > ores-$(date +%s.%N).tgz
 
 
       for x in *; do
+        echo "npm is adding this tar file to the cache: $x";
         command npm cache add "$x";
       done
   )
