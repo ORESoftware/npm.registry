@@ -15,8 +15,6 @@ ENV HOME="/root"
 
 WORKDIR /app
 
-
-
 RUN echo "home is: $HOME"
 
 #RUN mkdir -p "$HOME/.npm-global"

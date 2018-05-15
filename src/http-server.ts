@@ -6,6 +6,10 @@ import cp = require('child_process');
 import * as path from "path";
 import net = require('net');
 import * as https from "https";
+import npm = require('npm');
+import * as utils from './utils';
+import fs = require('fs');
+import * as util from "util";
 
 // https://registry.npmjs.org/
 
@@ -14,21 +18,56 @@ import * as https from "https";
 // npm config set proxy http://localhost:3441
 // npm config set https-proxy http://localhost:3441
 
+// !!!!!
 // npm config set strict-ssl false
+
+const urls = <{[key:string]: string}>{
+  '/@oresoftware/waldo': '/host_user_home/WebstormProjects/oresoftware/waldo',
+  '/gmx': '/host_user_home/WebstormProjects/oresoftware/gmx',
+  '/r2g': '/host_user_home/WebstormProjects/oresoftware/r2g'
+};
 
 const s = http.createServer(function (clientRequest, clientResponse) {
   
-  console.log('server got a request');
+  // console.log('server got a request');
   
-  if (clientRequest.url === 'x') {
-    clientResponse.write('retrieve the tarball from local fs');
-    clientResponse.end();
+  const decoded = decodeURI(clientRequest.url);
+  
+  // console.log('decoded url:', decoded);
+  
+  const h = clientRequest.headers;
+  
+  const matchesJSON = String(h.accept || '').match('json');
+  const pacoteReqType = String(h['pacote-req-type'] || '') === 'packument';
+  
+  if (urls[decoded]  && !pacoteReqType && String(h.referer).trim().startsWith('install')) {
+  
+    console.log('req.method', clientRequest.method);
+    console.log('req.url', clientRequest.url);
+    console.log('req.headers', clientRequest.headers);
+    
+    console.log('we doing this project thang...');
+    
+    const project = urls[decoded];
+    
+    fs.readFile(path.resolve(project + '/.npmignore'), function(err, data){
+      
+      if(err){
+        clientResponse.statusCode = 500;
+        clientResponse.write(util.inspect(err));
+        return;
+      }
+  
+     const exclusions = utils.npmIgnoreToTARExclude(utils.npmIgnoreToArray(String(data || '')));
+      const k = cp.spawn('bash');
+      k.stdin.end(`tar -cz ${exclusions} ${project} `);
+      k.stdout.pipe(clientResponse);
+      
+    });
+    
+    
     return;
   }
-  
-  console.log('req.method', clientRequest.method);
-  console.log('req.url', clientRequest.url);
-  console.log('req.headers', clientRequest.headers);
   
   const proxy = http.request({
       hostname: 'registry.npmjs.org',
@@ -40,15 +79,16 @@ const s = http.createServer(function (clientRequest, clientResponse) {
       res.pipe(clientResponse);
     });
   
-  clientRequest.on('data', function(d){
-    console.log('client request data:', String(d));
-  });
+  // clientRequest.on('data', function(d){
+  //   console.log('client request data:', String(d));
+  // });
   
-  const h = clientRequest.headers;
+  
   Object.keys(h).forEach(function(k){
       proxy.write(`${k}\t${h[k]}\r\n`);
   });
   
+  proxy.write('\n');
   clientRequest.pipe(proxy);
   
 });
