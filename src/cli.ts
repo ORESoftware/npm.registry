@@ -15,8 +15,6 @@ const s = net.createServer(function (s) {
   const k = cp.spawn('bash');
   k.stdin.end('npm pack');
   
-  // k.stdin.end('exit 0;');
-  
   const pwd = process.cwd();
   let stdout = '';
   

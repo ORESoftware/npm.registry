@@ -22,7 +22,10 @@ npm(){
       mkdir -p  "$HOME/.npm-temp-cache";
       cd  "$HOME/.npm-temp-cache"
 
-      nc localhost 3440 | tar -x > ores.tgz
+#      nc localhost 3440 | tar -x > ores.tgz
+
+      nc localhost 3440 | tar -x -O > ores-$(date +%s.%N).tgz
+
 
       for x in *; do
         command npm cache add "$x";
