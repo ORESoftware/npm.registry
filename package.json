@@ -29,10 +29,10 @@
   },
   "homepage": "https://github.com/your-org/registry#readme",
   "dependencies": {
-    "gmx": "latest"
+    "gmx": "0.0.123"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.46",
-    "@types/node": "^9.6.2"
+    "@types/node": "^9.6.16"
   }
 }

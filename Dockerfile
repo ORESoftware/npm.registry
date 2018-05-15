@@ -22,7 +22,9 @@ RUN sudo chown -R $(whoami) "$HOME/.npm-global"
 RUN sudo chown -R $(whoami) "$HOME/app"
 RUN  npm install -g typescript
 
-RUN npm install -g "@oresoftware/registry@0.0.104"
+RUN npm install "@oresoftware/registry@0.0.105"
+
+#RUN npm install -g "@oresoftware/registry@0.0.105"
 
 ENV npm_registry_override="yes"
 

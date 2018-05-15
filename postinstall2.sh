@@ -9,6 +9,12 @@ fi
 
 export r2g_skip_postinstall="yes";
 
+ores_registry_exec="@oresoftware/registry";
+
+if [[ "$ores_registry_exec" == "yes" ]]; then
+     r2g_exec="/Users/alexamil/WebstormProjects/oresoftware/registry";
+fi
+
 npmr_gray='\033[1;30m'
 npmr_magenta='\033[1;35m'
 npmr_cyan='\033[1;36m'
@@ -55,7 +61,7 @@ mkdir -p "$nm" && {
     }
 
     (
-      cd "$HOME/.oresoftware/nodejs" && npm install --silent @oresoftware/registry 2> /dev/null || {
+      cd "$HOME/.oresoftware/nodejs" && npm install --silent "$ores_registry_exec" 2> /dev/null || {
 
         echo "could not install npm in user home.";
 
