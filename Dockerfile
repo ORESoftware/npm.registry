@@ -31,20 +31,27 @@ RUN sudo chown -R $(whoami) "."
 RUN mkdir -p "$HOME/.oresoftware/execs"
 RUN mkdir -p "$HOME/.oresoftware/bash"
 
+RUN npm set strict-ssl false;
+RUN npm config set strict-ssl false;
+#RUN npm set registry "npm_registry_server:3441"
+#RUN npm config set registry "npm_registry_server:3441"
+#RUN npm set registry "http://foo:3441"
+#RUN npm config set registry "http://foo:3441"
+
 COPY package.json .
 RUN npm install typescript
 
-RUN  curl -H 'Cache-Control: no-cache' \
-        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.sh?$(date +%s)" \
-        --output "$HOME/.oresoftware/bash/npm.registry.sh"
-
-RUN  curl -H 'Cache-Control: no-cache' \
-        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.exec.sh?$(date +%s)" \
-        --output "$HOME/.oresoftware/execs/npm.registry.sh"
-
-ENV npm_registry_override="yes"
-
-RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh"
+#RUN  curl -H 'Cache-Control: no-cache' \
+#        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.sh?$(date +%s)" \
+#        --output "$HOME/.oresoftware/bash/npm.registry.sh"
+#
+#RUN  curl -H 'Cache-Control: no-cache' \
+#        "https://raw.githubusercontent.com/oresoftware/npm.registry/master/npm.exec.sh?$(date +%s)" \
+#        --output "$HOME/.oresoftware/execs/npm.registry.sh"
+#
+#ENV npm_registry_override="yes"
+#
+#RUN /bin/bash -c ". $HOME/.oresoftware/bash/npm.registry.sh"
 
 #RUN echo "$HOME/.oresoftware/execs/npm.registry.sh" | bash
 

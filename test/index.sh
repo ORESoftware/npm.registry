@@ -5,4 +5,9 @@
 #
 #echo "the foo is: $foo";
 
-source "./npm.sh" && npm install --loglevel=warn
+#source "./npm.sh" && npm install --loglevel=warn
+
+npm set registry "http://npm_registry_server:3441"
+npm config set registry "http://npm_registry_server:3441"
+
+npm install --loglevel=warn

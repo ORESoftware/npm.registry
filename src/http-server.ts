@@ -26,6 +26,10 @@ const s = http.createServer(function (clientRequest, clientResponse) {
     return;
   }
   
+  console.log('req.method', clientRequest.method);
+  console.log('req.url', clientRequest.url);
+  console.log('req.headers', clientRequest.headers);
+  
   const proxy = http.request({
       hostname: 'registry.npmjs.org',
       port: 80,
@@ -35,6 +39,10 @@ const s = http.createServer(function (clientRequest, clientResponse) {
     function (res) {
       res.pipe(clientResponse);
     });
+  
+  clientRequest.on('data', function(d){
+    console.log('client request data:', String(d));
+  });
   
   clientRequest.pipe(proxy);
   

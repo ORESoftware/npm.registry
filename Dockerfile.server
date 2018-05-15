@@ -31,6 +31,9 @@ RUN sudo chown -R $(whoami) "."
 RUN mkdir -p "$HOME/.oresoftware/execs"
 RUN mkdir -p "$HOME/.oresoftware/bash"
 
+RUN npm set strict-ssl false;
+RUN npm config set strict-ssl false;
+
 COPY package.json .
 RUN npm install typescript
 RUN npm install
@@ -42,6 +45,7 @@ COPY . .
 RUN tsc || echo "fail compilation";
 #RUN gmx tsc
 
-EXPOSE 3440
+EXPOSE 3441
 
-ENTRYPOINT ["node", "dist/cli.js"]
+#ENTRYPOINT ["node", "dist/cli.js"]
+ENTRYPOINT ["node", "dist/http-server.js"]
