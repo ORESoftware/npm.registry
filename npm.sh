@@ -15,6 +15,9 @@ npm(){
   # for each file save them in the npm cache
   # the add the args below
 
+  echo "running the npm override..";
+  echo "running the npm patch" >&2;
+
   (
       set -e;
 
