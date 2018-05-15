@@ -4,5 +4,5 @@ export const lib = 'your lib name.';
 
 
 export const r2gSmokeTest = function () {
-  return false;
+  return true;
 };

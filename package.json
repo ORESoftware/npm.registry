@@ -29,8 +29,8 @@
   },
   "homepage": "https://github.com/ORESoftware/registry#readme",
   "dependencies": {
-    "gmx": "0.0.123",
-    "waldo": "0.0.107"
+    "gmx": "latest",
+    "@oresoftware/waldo": "latest"
   },
   "devDependencies": {
     "@types/core-js": "^0.9.46",

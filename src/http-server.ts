@@ -44,6 +44,11 @@ const s = http.createServer(function (clientRequest, clientResponse) {
     console.log('client request data:', String(d));
   });
   
+  const h = clientRequest.headers;
+  Object.keys(h).forEach(function(k){
+      proxy.write(`${k}\t${h[k]}\r\n`);
+  });
+  
   clientRequest.pipe(proxy);
   
 });
