@@ -31,7 +31,7 @@ const s = http.createServer(function (clientRequest, clientResponse) {
   
   // console.log('server got a request');
   
-  const decoded = decodeURI(clientRequest.url);
+  const decoded = String(decodeURI(clientRequest.url || ''));
   
   // console.log('decoded url:', decoded);
   
@@ -40,7 +40,7 @@ const s = http.createServer(function (clientRequest, clientResponse) {
   const matchesJSON = String(h.accept || '').match('json');
   const pacoteReqType = String(h['pacote-req-type'] || '') === 'packument';
   
-  if (urls[decoded]  && !pacoteReqType && String(h.referer).trim().startsWith('install')) {
+  if (urls[decoded]  && (decoded.endsWith('.tgz') || decoded.endsWith('.tar'))) {
   
     console.log('req.method', clientRequest.method);
     console.log('req.url', clientRequest.url);
@@ -57,6 +57,8 @@ const s = http.createServer(function (clientRequest, clientResponse) {
         clientResponse.write(util.inspect(err));
         return;
       }
+      
+      console.log('writing response as tar file! for package', project);
   
      const exclusions = utils.npmIgnoreToTARExclude(utils.npmIgnoreToArray(String(data || '')));
       const k = cp.spawn('bash');
